@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// Main UI handler
 public class GameManager : MonoBehaviour
 {
     /*
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     public bool isGameActive;
 
     public Button restartButton;
+    public Button backToMenuButton;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,7 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(true);
         isGameActive = false;
         restartButton.gameObject.SetActive(true);
+        backToMenuButton.gameObject.SetActive(true);
     }
 
     public void RestartGame()
@@ -68,6 +71,11 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         score = 0;
         hoard = 0;
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
 }
