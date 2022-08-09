@@ -33,5 +33,16 @@ EditorApplication.ExitPlaymode();
 #else
         Application.Quit(); // original code to quit Unity player
 #endif
+        MainManager.Instance.SaveName();
+    }
+
+    public void SaveNameInput()
+    {
+
+    }
+
+    public void LoadNameInput()
+    {
+
     }
 }

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI hoardText;
     public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI nameText; // for MainManager
     public bool isGameActive;
 
     public Button restartButton;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
         UpdateScore(0);
         UpdateBank(0);
         isGameActive = true;
+        nameText.text = MainManager.Instance.Name;
     }
 
     // Update is called once per frame
