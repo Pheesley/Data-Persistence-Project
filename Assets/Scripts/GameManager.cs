@@ -15,13 +15,14 @@ public class GameManager : MonoBehaviour
      */
 
     public int score; // public for PirateBase
-    private int hoard;
+    private int bank; // the bank is the true score, where score is saved!
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI hoardText;
+    public TextMeshProUGUI bankText;
     public TextMeshProUGUI gameOverText;
-    public TextMeshProUGUI nameText; // for MainManager
-    public bool isGameActive;
 
+    public TextMeshProUGUI nameAndBestScoreText; // for MainManager
+
+    public bool isGameActive;
     public Button restartButton;
     public Button backToMenuButton;
 
@@ -31,7 +32,12 @@ public class GameManager : MonoBehaviour
         UpdateScore(0);
         UpdateBank(0);
         isGameActive = true;
-        nameText.text = MainManager.Instance.Name;
+
+        // passes Name from MainManager to GameManager
+        if (MainManager.Instance != null)
+        {
+            nameAndBestScoreText.text = MainManager.Instance.Name + " : " + SaveBestScore(bank);
+        }
     }
 
     // Update is called once per frame
@@ -49,18 +55,23 @@ public class GameManager : MonoBehaviour
     // add score to bank
     public void UpdateBank(int scoreToAdd)
     {
-        hoard += scoreToAdd;
+        bank += scoreToAdd;
         score = 0;
         scoreText.text = "Stash: " + score;
-        hoardText.text = "Hoard: " + hoard;
+        bankText.text = "Bank: " + bank;
     }
 
+    // keep track of latest best score
+    // called when an enemy collides with the player
+    // which is the only way to lose (as of now).
     public void GameOver()
     {
         gameOverText.gameObject.SetActive(true);
         isGameActive = false;
         restartButton.gameObject.SetActive(true);
         backToMenuButton.gameObject.SetActive(true);
+
+        SaveBestScore(bank);
     }
 
     public void RestartGame()
@@ -72,12 +83,27 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = true;
         score = 0;
-        hoard = 0;
+        bank = 0;
     }
 
     public void BackToMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    // we need to save the highest score between scenes!
+    // and the player's name
+    // passes it to MainManager
+    public int SaveBestScore(int currentScore)
+    {
+        // checks if current player's score is greater than the best score
+        if (currentScore > MainManager.Instance.bestScore)
+        {
+            MainManager.Instance.bestScore = currentScore;
+            MainManager.Instance.SaveBestScore();
+            MainManager.Instance.SaveName();
+        }
+        return currentScore;
     }
 
 }

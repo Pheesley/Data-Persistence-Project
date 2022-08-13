@@ -662,7 +662,7 @@ Transform:
   - {fileID: 654866821}
   - {fileID: 1013271421}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &456757483
 Rigidbody:
@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 467853392}
   - component: {fileID: 467853391}
   m_Layer: 5
-  m_Name: Name Text
+  m_Name: Name and Best Score Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2487,9 +2487,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   scoreText: {fileID: 44917051}
-  hoardText: {fileID: 331566557}
+  bankText: {fileID: 331566557}
   gameOverText: {fileID: 2022696367}
-  nameText: {fileID: 467853391}
+  nameAndBestScoreText: {fileID: 467853391}
   isGameActive: 0
   restartButton: {fileID: 968383180}
   backToMenuButton: {fileID: 1507749860}
@@ -2505,7 +2505,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2022696365
 GameObject:
@@ -2888,7 +2888,7 @@ PrefabInstance:
     - target: {fileID: 6928257845983193554, guid: 1c986ab95f8d6b84881aa47f3546953e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6928257845983193554, guid: 1c986ab95f8d6b84881aa47f3546953e,
         type: 3}
