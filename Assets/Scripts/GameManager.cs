@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         // passes Name from MainManager to GameManager
         if (MainManager.Instance != null)
         {
-            nameAndBestScoreText.text = MainManager.Instance.bestScoreName + " : " + MainManager.Instance.bestScore;
+            nameAndBestScoreText.text = "BestScore: " + MainManager.Instance.bestScoreName + " : " + MainManager.Instance.bestScore;
         }
     }
 
@@ -93,8 +93,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    // we need to save the highest score between scenes!
-    // and the player's name
     // Saves player's name and highscore to MainManager
     public int UpdateBestScore(int currentScore)
     {

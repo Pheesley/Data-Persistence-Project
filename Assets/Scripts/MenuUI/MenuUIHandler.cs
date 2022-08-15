@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI; // required for InputField
+using UnityEngine.UI; // required for InputField
 using TMPro;
 using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
@@ -11,22 +11,19 @@ using UnityEditor;
 public class MenuUIHandler : MonoBehaviour
 {
     // not relevant to start method code
-    public TextMeshProUGUI nameText; 
+    public TextMeshProUGUI nameText;
     public TextMeshProUGUI bestScoreText;
+
+    // taken from unity answers
+    public TMP_InputField enterName;
+    
+    // for non-TMP inputfield
+    //public InputField input;
 
     // Start is called before the first frame update
     void Start()
     {
-        // taken from StackOverflow
-        /*
-        var input = gameObject.GetComponent<InputField>();
-        var se = new InputField.SubmitEvent();
-        se.AddListener(SubmitName);
-        input.onEndEdit = se;
-        */
 
-        // or use the line below
-        //input.onEndEdit.AddListener(SubmitName); // this also works
     }
     // called when the script instance is being loaded
     void Awake()
@@ -37,14 +34,16 @@ public class MenuUIHandler : MonoBehaviour
     public void UpdateMenu()
     {
         bestScoreText.text = "Best Score: " + MainManager.Instance.bestScoreName + " : " + MainManager.Instance.bestScore;
+        //dead code
+        enterName.text = MainManager.Instance.bestScoreName;
     }
 
     // called by StartButton
     // WARNING: this overrides any name previously entered, so names with highscores can be overwritten
-    public void SubmitName(string arg0)
+    // best player's name is now saved in a separate data field to avoid the above issue.
+    public void SubmitName()
     {
-        // string parameter is unnecessary, but useful for testing
-        Debug.Log(arg0);
+        // can set Name = enterName.text to avoid mistakes
         MainManager.Instance.Name = nameText.text;
     }
 

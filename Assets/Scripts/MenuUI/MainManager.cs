@@ -62,6 +62,7 @@ public class MainManager : MonoBehaviour
     }
 
     // saves best player's name and their best score
+    // uses two data fields: bestScore and bestScoreName
     public void SaveBestScore()
     {
         SaveData data = new SaveData();
