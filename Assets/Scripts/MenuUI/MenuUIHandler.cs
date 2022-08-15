@@ -36,10 +36,11 @@ public class MenuUIHandler : MonoBehaviour
 
     public void UpdateMenu()
     {
-        bestScoreText.text = "Best Score: " + MainManager.Instance.Name + " : " + MainManager.Instance.bestScore;
+        bestScoreText.text = "Best Score: " + MainManager.Instance.bestScoreName + " : " + MainManager.Instance.bestScore;
     }
 
     // called by StartButton
+    // WARNING: this overrides any name previously entered, so names with highscores can be overwritten
     public void SubmitName(string arg0)
     {
         // string parameter is unnecessary, but useful for testing
@@ -54,6 +55,7 @@ public class MenuUIHandler : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    // called by Exit button
     public void Exit()
     {
 #if UNITY_EDITOR
@@ -64,7 +66,7 @@ EditorApplication.ExitPlaymode();
         MainManager.Instance.SaveName();
     }
 
-    // we need to save the previous Name betweens scenes!
+    // we need to save the previous Name between scenes!
     public void SaveNameInput()
     {
 
@@ -73,5 +75,12 @@ EditorApplication.ExitPlaymode();
     public void LoadNameInput()
     {
 
+    }
+
+    // use with CAUTION! For testing only
+    // needs button, may not work properly
+    public void DeleteBestScore()
+    {
+        MainManager.Instance.bestScore = 0;
     }
 }

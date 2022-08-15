@@ -12,6 +12,7 @@ public class MainManager : MonoBehaviour
     // data fields to be passed to Main scene
     public string Name; 
     public int bestScore;
+    public string bestScoreName;
 
     // called when the script instance is being loaded
     private void Awake()
@@ -26,7 +27,7 @@ public class MainManager : MonoBehaviour
         Instance = this; // allows Instance to be called from any other script
         DontDestroyOnLoad(gameObject); // the gameObject attached to this script will not be destroyed when the scene changes
 
-        LoadName(); // need to initialize loaded name!
+        // Loads Best player's name and best score
         LoadBestScore();
     }
 
@@ -35,6 +36,7 @@ public class MainManager : MonoBehaviour
     {
         public string Name;
         public int bestScore;
+        public string bestScoreName;
     }
 
     public void SaveName()
@@ -59,10 +61,12 @@ public class MainManager : MonoBehaviour
         }
     }
 
+    // saves best player's name and their best score
     public void SaveBestScore()
     {
         SaveData data = new SaveData();
         data.bestScore = bestScore;
+        data.bestScoreName = bestScoreName;
 
         string json = JsonUtility.ToJson(data);
 
@@ -71,14 +75,16 @@ public class MainManager : MonoBehaviour
 
     public void LoadBestScore()
     {
-        string path = Application.persistentDataPath + "savefile.json";
+        string path = Application.persistentDataPath + "/savefile.json";
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
+            bestScoreName = data.bestScoreName;
             bestScore = data.bestScore;
         }
     }
+
 }
 

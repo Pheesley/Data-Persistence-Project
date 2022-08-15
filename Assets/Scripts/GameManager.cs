@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         // passes Name from MainManager to GameManager
         if (MainManager.Instance != null)
         {
-            nameAndBestScoreText.text = MainManager.Instance.Name + " : " + SaveBestScore(bank);
+            nameAndBestScoreText.text = MainManager.Instance.bestScoreName + " : " + MainManager.Instance.bestScore;
         }
     }
 
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         
     }
 
+    // called when player collides with objects representing Gold
     public void UpdateScore(int scoreToAdd) // make this public
     {
         score += scoreToAdd;
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
     }
 
     // add score to bank
+    // called when player collides with PirateBase
     public void UpdateBank(int scoreToAdd)
     {
         bank += scoreToAdd;
@@ -71,7 +73,7 @@ public class GameManager : MonoBehaviour
         restartButton.gameObject.SetActive(true);
         backToMenuButton.gameObject.SetActive(true);
 
-        SaveBestScore(bank);
+        UpdateBestScore(bank);
     }
 
     public void RestartGame()
@@ -93,15 +95,15 @@ public class GameManager : MonoBehaviour
 
     // we need to save the highest score between scenes!
     // and the player's name
-    // passes it to MainManager
-    public int SaveBestScore(int currentScore)
+    // Saves player's name and highscore to MainManager
+    public int UpdateBestScore(int currentScore)
     {
         // checks if current player's score is greater than the best score
         if (currentScore > MainManager.Instance.bestScore)
         {
             MainManager.Instance.bestScore = currentScore;
+            MainManager.Instance.bestScoreName = MainManager.Instance.Name;
             MainManager.Instance.SaveBestScore();
-            MainManager.Instance.SaveName();
         }
         return currentScore;
     }
